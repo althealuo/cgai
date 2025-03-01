@@ -77,8 +77,9 @@ vec4 readSDFVolume(vec3 p)
     //// convert sdf value to a color
 
     //// your implementation starts
-
-    return vec4(0.0, 0.0, 0.0, 0.0);
+    vec3 rgb = palette(-distance);
+    float density = distance < 0.0 ? 1.0 : 0.0;
+    return vec4(rgb, density);
 
     //// your implementation ends
 }
@@ -103,8 +104,9 @@ vec4 readCTVolume(vec3 p)
     }
 
     //// your implementation starts
-
-    return vec4(0.0, 0.0, 0.0, 0.0);
+    float density = texture(iVolume, tex_coord)[0];
+    vec3 rgb = palette(density);
+    return vec4(rgb, density) * 2.0;
 
     //// your implementation ends
 }
@@ -133,8 +135,24 @@ vec4 volumeRendering(vec3 ro, vec3 rd, float near, float far, int n_samples)
         vec3 p = ro + t * rd;                                                   //// sample position on the ray
 
         //// your implementation starts
+        vec4 sdfData = readSDFVolume(p+vec3(2.0, 0.0, 0.0));
+        vec4 ctData = readCTVolume(p-vec3(2.0, 0.0, 0.0));
+        
+        // for sphere data
+        vec3 rgbSphere = sdfData.rgb;
+        float densitySphere = sdfData.a;
 
+        // for CT data
+        vec3 rgbCT = ctData.rgb;
+        float densityCT = ctData.a;
 
+        // combine
+        vec3 rgb = rgbSphere + rgbCT;
+        float density = densitySphere + densityCT;
+
+        float expTerm = exp(-density * stepSize);
+        color += transmittance * rgb * (1.0 - expTerm);
+        transmittance *= expTerm;
         //// your implementation ends
 
         //// early termination if opacity is high
