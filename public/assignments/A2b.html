@@ -124,10 +124,10 @@
 </p>
 <h3 class="h4-custom">Step 1.1: Positional Encoding</h3>
 <p class="mb-4">
-    To enable the network to learn high-frequency details, NeRF applies positional encoding to 3D input coordinates. This transformation extends each coordinate into a higher-dimensional space by applying a series of sine and cosine functions (refer to Page 42 of the lecture slides). Note that we additionally include the input p itself, following the original implementation of NeRF.
+    To enable the network to learn high-frequency details, NeRF applies positional encoding to 3D input coordinates. This transformation extends each coordinate into a higher-dimensional space by applying a series of sine and cosine functions (refer to Page 42 of the lecture slides). Note that there are two differences between the formula used here and the one presented in the lecture slides. First, we explicitly include the input <code>p</code> itself at the beginning. Second, we do not multiply by <code>&pi;</code>. Both implementations follow the original NeRF code and conceptually have the same effect as the one in the lecture. However, you must adhere to this instruction as the final serialization function assumes this design; deviating from it may lead to rendering issues.
 </p>
 <div class="image-container">
-    <img src="/assignments/A2b_img/posenc.png" alt="Positional Encoding">
+    <img src="/assignments/A2b_img/posenc_nopi.png" alt="Positional Encoding">
 </div>
 <h3 class="h4-custom">Step 1.2: Volume Rendering</h3>
 <p class="mb-4">
