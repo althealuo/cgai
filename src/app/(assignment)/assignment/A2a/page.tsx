@@ -10,7 +10,7 @@ import fragmentShader from './fragment.glsl';
 const Test = ({ dpr, volumeData }: { dpr: number; volumeData: Uint8Array | null }) => {
   const { viewport } = useThree();
 
-  const tex = new THREE.Data3DTexture(volumeData, 256, 256, 256);
+  const tex = new THREE.Data3DTexture(volumeData, 302, 302, 302);
   tex.format = THREE.RedFormat;
   // tex.type = THREE.FloatType;
   tex.minFilter = THREE.LinearFilter;
@@ -51,7 +51,7 @@ export default function TestPage() {
   const [volumeData, setVolumeData] = useState<Uint8Array | null>(null);
   useEffect(() => {
     // Define the fixed path to the file
-    const fixedPath = '/foot_256x256x256_uint8.raw'; // Replace with the actual path
+    const fixedPath = '/csafe_heptane_302x302x302_uint8.raw'; // Replace with the actual path
 
     const fetchVolumeData = async () => {
       try {
