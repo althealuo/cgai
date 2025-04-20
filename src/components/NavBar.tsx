@@ -46,7 +46,7 @@ const tutorials: { title: string; href: string; description: string }[] = [
     title: 'Mass Spring System',
     href: '/tutorial/mass-spring-tutorial',
     description: 'Mass Spring System',
-  }
+  },
 ];
 
 const assignments: { title: string; href: string; description: string }[] = [
@@ -109,7 +109,12 @@ const assignments: { title: string; href: string; description: string }[] = [
     title: 'Assignment 4 Doc',
     href: '/assignment/A4_doc',
     description: 'A4 Document: Position-based Dynamics',
-  }
+  },
+  {
+    title: 'Final Project Doc',
+    href: '/assignment/Final_doc',
+    description: 'Final Project Document',
+  },
 ];
 
 export function NavBar() {
@@ -144,6 +149,18 @@ export function NavBar() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+        {/* Final Project */}
+        {/* <NavigationMenuItem>
+          <Link
+            href="/assignment/Final_doc"
+            legacyBehavior
+            passHref
+          >
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Final Project
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
           <Link href="https://github.com/cg-gatech/cgai" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -172,39 +189,27 @@ export function NavBar() {
         </NavigationMenuItem>
         {/*  */}
         <NavigationMenuItem>
-          <Link
-            href="/reading-materials"
-            legacyBehavior
-            passHref
-          >
+          <Link href="/reading-materials" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <BookAIcon className='w-4 h-4 mr-2' />
+              <BookAIcon className="w-4 h-4 mr-2" />
               Reading Materials
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         {/*  */}
         <NavigationMenuItem>
-          <Link
-            href="/course-information"
-            legacyBehavior
-            passHref
-          >
+          <Link href="/course-information" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <InfoIcon className='w-4 h-4 mr-2' />
+              <InfoIcon className="w-4 h-4 mr-2" />
               Course Overview
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-                {/*  */}
-                <NavigationMenuItem>
-          <Link
-            href="/syllabus"
-            legacyBehavior
-            passHref
-          >
+        {/*  */}
+        <NavigationMenuItem>
+          <Link href="/syllabus" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <TreesIcon className='w-4 h-4 mr-2' />
+              <TreesIcon className="w-4 h-4 mr-2" />
               Syllabus
             </NavigationMenuLink>
           </Link>

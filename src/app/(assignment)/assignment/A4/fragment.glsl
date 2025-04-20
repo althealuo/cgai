@@ -185,7 +185,7 @@ void load_state() {
 
 
 /////////////////////////////////////////////////////
-//// Step 1: Computing the spring constraint
+//// Step 1.1: Computing the spring constraint
 //// This function calculates the deviation of a spring's length 
 //// from its rest length. The constraint is defined as L - L0, 
 //// This constraint is later used to adjust the positions of particles 
@@ -203,7 +203,7 @@ float spring_constraint(Spring s) {
 }
 
 /////////////////////////////////////////////////////
-//// Step 2: Computing the spring constraint gradient
+//// Step 1.2: Computing the spring constraint gradient
 //// This function calculates the gradient of the spring constraint constraint 
 //// for a spring a--b with respect to the position of a.
 /////////////////////////////////////////////////////
@@ -223,10 +223,10 @@ vec2 spring_constraint_grad(Spring s, int particle_idx) {
 }
 
 /////////////////////////////////////////////////////
-//// Step 3: Solving a single spring constraint
+//// Step 1.3: Solving a single spring constraint
 //// Calculate the numerator and denominator for the Lagrangian multiplier update.
 //// You will calculate the numer/denom for PBD updates.
-//// The Lagrangian multiplier update is calculated with lambda=-(numer/denom)
+//// The Lagrangian multiplier update is calculated with lambda=(numer/denom)
 //// See the documentation for more details.
 /////////////////////////////////////////////////////
 void solve_spring(Spring s, float dt) {   
@@ -248,7 +248,7 @@ void solve_spring(Spring s, float dt) {
 }
 
 /////////////////////////////////////////////////////
-//// Step 4: Computing the collision constraint
+//// Step 2.1: Computing the collision constraint
 //// If two particles a,b are closer than collision_dist,
 //// a spring constraint is applied to separate them.
 //// The rest length of the spring is set to collision_dist.
@@ -271,7 +271,7 @@ float collision_constraint(vec2 a, vec2 b, float collision_dist){
 }
 
 /////////////////////////////////////////////////////
-//// Step 5: Computing the collision constraint gradient
+//// Step 2.2: Computing the collision constraint gradient
 //// If two particles a,b are closer than collision_dist,
 //// calculate the gradient of the collision constraint with respect to a.
 //// It's similar to the spring constraint gradient.
@@ -292,11 +292,11 @@ vec2 collision_constraint_gradient(vec2 a, vec2 b, float collision_dist){
 }
 
 /////////////////////////////////////////////////////
-//// Step 6: Solving a single collision constraint
+//// Step 2.3: Solving a single collision constraint
 //// It solves for the collision constraint between particle i and j.
 //// Calculate the numerator and denominator for the Lagrangian multiplier update.
 //// You will calculate the numer/denom for PBD updates.
-//// The Lagrangian multiplier update is calculated with lambda=-(numer/denom)
+//// The Lagrangian multiplier update is calculated with lambda=(numer/denom)
 //// See the documentation for more details.
 /////////////////////////////////////////////////////
 void solve_collision_constraint(int i, int j, float collision_dist, float dt){
@@ -324,7 +324,7 @@ float phi(vec2 p){
 }
 
 /////////////////////////////////////////////////////
-//// Step 7: Computing the ground constraint
+//// Step 3.1: Computing the ground constraint
 //// For a point p, if phi(p) < ground_collision_dist,
 //// we set a constraint to push the point away from the ground.
 //// The constraint is defined as phi(p) - ground_collision_dist.
@@ -342,7 +342,7 @@ float ground_constraint(vec2 p, float ground_collision_dist){
 }
 
 /////////////////////////////////////////////////////
-//// Step 8: Computing the ground constraint gradient
+//// Step 3.2: Computing the ground constraint gradient
 //// If phi(p) < ground_collision_dist, 
 //// compute the gradient of the ground constraint.
 //// Otherwise return vec2(0.0, 0.0).
@@ -363,11 +363,11 @@ vec2 ground_constraint_gradient(vec2 p, float ground_collision_dist){
 }
 
 /////////////////////////////////////////////////////
-//// Step 9: Solving a single ground constraint
+//// Step 3.3: Solving a single ground constraint
 //// It solves for the ground constraint for particle i.
 //// Calculate the numerator and denominator for the Lagrangian multiplier update.
 //// You will calculate the numer/denom for PBD updates.
-//// The Lagrangian multiplier update is calculated with lambda=-(numer/denom)
+//// The Lagrangian multiplier update is calculated with lambda=(numer/denom)
 //// See the documentation for more details.
 /////////////////////////////////////////////////////
 void solve_ground_constraint(int i, float ground_collision_dist, float dt){
