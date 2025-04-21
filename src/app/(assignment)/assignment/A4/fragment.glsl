@@ -30,7 +30,7 @@ struct Particle {
 const float damp = 0.4;
 const float collision_dist = 0.2;
 const float ground_collision_dist = 0.1;
-const vec2 gravity = vec2(0.0, -1);
+const vec2 gravity = vec2(0.0, -10);
 
 // Define n_rope rope particles and add one extra "mouse particle".
 const int MAX_PARTICLES = 20;
